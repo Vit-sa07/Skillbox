@@ -11,16 +11,8 @@ public class Cat {
     private double eatenFood = 0;
     private double peeSum;
     private static int count = 0;
-    private String status;
-    private String colorCat;
+    private catsColor colorCat;
 
-    public String getColorCat() {
-        return colorCat;
-    }
-
-    public void setColorCat(String colorCat) {
-        this.colorCat = colorCat;
-    }
 
     public Cat() {
         weight = 1500.0 + 3000.0 * Math.random();
@@ -28,10 +20,10 @@ public class Cat {
         minWeight = 1000.0;
         maxWeight = 9000.0;
         count++;
-        status = "New";
     }
 
     public Cat(double weight) {
+        this();
         this.weight = weight;
 
     }
@@ -76,30 +68,39 @@ public class Cat {
 
     public Cat catCopy(Cat cat)
     {
-        this.originWeight  = cat.originWeight;
-        this.minWeight = cat.minWeight;
-        this.maxWeight = cat.minWeight;
-        this.eatenFood = cat.eatenFood;
-        this.weight = cat.weight;
-        return cat;
+        Cat clone = new Cat();
+        clone.originWeight  = cat.originWeight;
+        clone.minWeight = cat.minWeight;
+        clone.maxWeight = cat.minWeight;
+        clone.eatenFood = cat.eatenFood;
+        clone.weight = cat.weight;
+        return clone;
     }
 
 
+    public catsColor getColorCat() {
+        return colorCat;
+    }
+
+    public void setColorCat(catsColor colorCat) {
+        this.colorCat = colorCat;
+    }
+
     public String getStatus() {
-        return status;
+        if (weight < minWeight) {
+            return "Dead";
+        } else if (weight > maxWeight) {
+            return "Exploded";
+        } else if (weight > originWeight) {
+            return "Sleeping";
+        } else {
+            return "Playing";
+        }
     }
 
     void updateStaus() {
-        if (weight < minWeight) {
-            status = "Dead";
+        if (weight < minWeight || maxWeight < weight) {
             count--;
-        } else if (weight > maxWeight) {
-            status = "Exploded";
-            count--;
-        } else if (weight > originWeight) {
-            status = "Sleeping";
-        } else {
-            status = "Playing";
         }
     }
 }

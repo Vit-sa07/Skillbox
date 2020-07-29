@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
-
 public enum catsColor {
+    BROWN,
+    WHITE,
+    BLACK,
+    GRAY,
+    RED
 }

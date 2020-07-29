@@ -59,9 +59,10 @@ public class Loader
         System.out.println(Cat.getCount());
         System.out.println(Oleg.getWeight());
         System.out.println(Alesha.getWeight());
+        Cat cloneKolya = Kolya.catCopy(Serg);
 
-        Kolya.catCopy(Serg);
-        System.out.println(Kolya.getWeight());
+
+        System.out.println(cloneKolya.getWeight());
         System.out.println(Serg.getWeight());
 
 
