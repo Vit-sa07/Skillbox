@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
         ArrayList<String> toDoList = new ArrayList<>() {{
@@ -13,69 +14,63 @@ public class Main {
             add(4, "Отправиться на работу");
 
         }};
-
-
+        System.out.println("Введите команду:");
+        System.out.println("Список команд:\nLIST открывает список, ADD добавляет дело в список, EDIT изменияет старое дело на новое, DELETE удаляет дело из списка");
         while (true) {
 
-            System.out.println("Введите команду:");
-            System.out.println("Список команд:\nLIST открывает список, ADD добавляет дело в список, EDIT изменияет старое дело на новое, DELETE удаляет дело из списка");
-
-            Scanner sc = new Scanner(System.in);
-            String command = sc.nextLine();
-
-
-            switch (command) {
-                case "LIST":
-                    for (int i = 0; i < toDoList.size(); i++) {
-                        System.out.println(i + " - " + toDoList.get(i));
+            Scanner scanner = new Scanner(System.in);
+            String str = scanner.nextLine();
+            String[] words = str.split("\\s");
+            if (words.length == 1) {
+                for (int i = 0; i < toDoList.size(); i++) {
+                    System.out.println(i + " " + toDoList.get(i));
+                }
+                System.out.println("Введите команду:");
+            } else {
+                String index = words[1].replaceAll("[^0-9]", "");
+                String item = str.substring(str.indexOf(' ')).trim();
+                if (words.length == 2) {
+                    if (words[0].equalsIgnoreCase("DELETE")) {
+                        int indexValue = Integer.parseInt(index);
+                        if (indexValue >= toDoList.size()) {
+                            System.out.println("Номер дела введён неверно!");
+                        } else {
+                            toDoList.remove(indexValue);
+                            System.out.println("Дело удалено!");
+                        }
+                        System.out.println("Введите команду:");
+                    } else if (words[0].equalsIgnoreCase("ADD")) {
+                        toDoList.add(item);
                     }
-                    break;
-
-                case "ADD":
-                    System.out.println("Список дел перед добавлением новой задачи :" + toDoList);
-                    System.out.println("Введите дело, которое нужно добавить в списиок");
-                    String add = sc.nextLine();
-                    toDoList.add(add);
-                    System.out.println("Список дел после добавления новой задачи :" + toDoList);
-
-                    break;
-
-                case "ADD INDEX":
-
-                    System.out.println("Список дел перед добавлением новой задачи :" + toDoList);
-                    System.out.println("Введите индекс места куда вы хотите добавить дело");
-                    int edIn = sc.nextInt();
-                    sc.nextLine();
-                    System.out.println("Введите дело, которое нужно добавить в списиок");
-                    String addIndex = sc.next();
-                    toDoList.add(edIn, addIndex);
-                    System.out.println("Список дел после добавления новой задачи :" + toDoList);
-                    break;
-
-                case "EDIT":
-                    System.out.println("Список дел перед изменением задачи " + toDoList);
-                    System.out.println("Введите индекс изменениемого дела");
-                    int ed = sc.nextInt();
-                    sc.nextLine();
-                    System.out.println("Введите дело, которое нужно добавить в списиок");
-                    String ede = sc.next();
-                    toDoList.set(ed, ede);
-                    System.out.println("Список дел после изменения задачи " + toDoList);
-                    break;
-
-                case "DELETE":
-                    System.out.println("Список дел перед удалением задачи " + toDoList);
-                    System.out.println("Введите индекс удаляемого дела");
-                    int del = sc.nextInt();
-                    toDoList.remove(del);
-                    System.out.println("Список дел после удаления задачи " + toDoList);
-                    break;
-
-                case "EXIT":
-                    System.exit(0);
-
-                default:
-                    System.out.println("Вы ввели неправильную команду! Пожалуйста, попробуйте еще раз или введите EXIT для выхода");
+                } else if (words.length > 2) {
+                    String itemWOIndex = item.substring(item.indexOf(' ')).trim();
+                    if (index.isEmpty()) {
+                        toDoList.add(item);
+                        System.out.println("Дело добавлено!");
+                    } else {
+                        int indexValue = Integer.parseInt(index);
+                        if (words[0].equalsIgnoreCase("ADD")) {
+                            if (indexValue >= toDoList.size()) {
+                                toDoList.add(itemWOIndex);
+                            } else if (indexValue < toDoList.size()) {
+                                toDoList.add(indexValue, itemWOIndex);
+                                System.out.println("Дело добавлено!");
+                            } else {
+                                toDoList.add(item);
+                            }
+                            System.out.println("Введите команду:");
+                        } else if (words[0].equalsIgnoreCase("EDIT")) {
+                            if (indexValue > toDoList.size()) {
+                                System.out.println("Номер дела введён неверно!");
+                            } else {
+                                toDoList.remove(indexValue);
+                                toDoList.add(indexValue, itemWOIndex);
+                                System.out.println("Дело изменено!");
+                            }
+                            System.out.println("Введите команду:");
+                        }
+                    }
+                }
             }
         }
     }
