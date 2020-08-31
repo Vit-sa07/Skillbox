@@ -17,15 +17,14 @@ public class Main {
         System.out.println("Введите команду:");
         System.out.println("Список команд:\nLIST открывает список, ADD добавляет дело в список, EDIT изменияет старое дело на новое, DELETE удаляет дело из списка");
         while (true) {
-
+            System.out.println("Введите команду:");
             Scanner scanner = new Scanner(System.in);
             String str = scanner.nextLine();
             String[] words = str.split("\\s");
-            if (words.length == 1) {
+            if (words[0].equals("LIST")) {
                 for (int i = 0; i < toDoList.size(); i++) {
                     System.out.println(i + " " + toDoList.get(i));
                 }
-                System.out.println("Введите команду:");
             } else {
                 String index = words[1].replaceAll("[^0-9]", "");
                 String item = str.substring(str.indexOf(' ')).trim();
@@ -38,7 +37,6 @@ public class Main {
                             toDoList.remove(indexValue);
                             System.out.println("Дело удалено!");
                         }
-                        System.out.println("Введите команду:");
                     } else if (words[0].equalsIgnoreCase("ADD")) {
                         toDoList.add(item);
                     }
@@ -52,13 +50,10 @@ public class Main {
                         if (words[0].equalsIgnoreCase("ADD")) {
                             if (indexValue >= toDoList.size()) {
                                 toDoList.add(itemWOIndex);
-                            } else if (indexValue < toDoList.size()) {
+                            } else {
                                 toDoList.add(indexValue, itemWOIndex);
                                 System.out.println("Дело добавлено!");
-                            } else {
-                                toDoList.add(item);
                             }
-                            System.out.println("Введите команду:");
                         } else if (words[0].equalsIgnoreCase("EDIT")) {
                             if (indexValue > toDoList.size()) {
                                 System.out.println("Номер дела введён неверно!");
@@ -67,7 +62,6 @@ public class Main {
                                 toDoList.add(indexValue, itemWOIndex);
                                 System.out.println("Дело изменено!");
                             }
-                            System.out.println("Введите команду:");
                         }
                     }
                 }
