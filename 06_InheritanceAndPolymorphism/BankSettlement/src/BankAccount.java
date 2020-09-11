@@ -5,6 +5,7 @@ public class BankAccount {
     public static int nextAccountNumber = 1;
     public final double RATE = 0.001;
 
+
     public BankAccount(String ownerName) {
         this.ownerName = ownerName;
         this.balance = 0.0;
@@ -23,6 +24,7 @@ public class BankAccount {
 
     public boolean deposit(double amount) {
         return this.updateBalance(amount);
+
     }
 
     public boolean withdraw(double amount) {
@@ -30,18 +32,18 @@ public class BankAccount {
     }
 
     public boolean updateBalance(double amount) {
-        if (this.balance + amount < 0) {
+        double sum = this.balance + amount;
+        if (sum < 0) {
             System.out.println("У вас недостаточно средств!");
             return false;
         } else {
-            this.balance = this.balance + amount;
+            this.balance = sum;
             return true;
         }
     }
 
     public void transferTo(BankAccount otherAccount, double amount) {
-        boolean withdrawalOK = this.withdraw(amount);
-        if (withdrawalOK) {
+        if (withdraw(amount)) {
             otherAccount.deposit(amount);
             System.out.println("Деньги успешно переведены!");
         }

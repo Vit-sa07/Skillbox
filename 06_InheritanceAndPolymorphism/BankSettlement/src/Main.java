@@ -11,13 +11,13 @@ public class Main {
         yourAccount.withdraw(20.00);
         System.out.println(yourAccount);
 
-        yourAccount.withdraw(1000000.00);
-        System.out.println(yourAccount);
-
-        myAccount.transferTo(yourAccount, 60.00);
-
-        System.out.println(myAccount);
-        System.out.println(yourAccount);
+//        yourAccount.withdraw(1000000.00);
+//        System.out.println(yourAccount);
+//
+//        myAccount.transferTo(yourAccount, 60.00);
+//
+//        System.out.println(myAccount);
+//        System.out.println(yourAccount);
 
     }
 }

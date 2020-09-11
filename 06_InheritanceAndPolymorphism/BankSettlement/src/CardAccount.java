@@ -7,9 +7,14 @@ public class CardAccount extends BankAccount {
 
     @Override
     public boolean withdraw(double amount) {
-        double i = amount * RATE;
-        this.balance = this.balance - amount - i;
-        return true;
+        double sum = this.balance + amount;
+        if (sum < 0) {
+            System.out.println("У вас недостаточно средств!");
+            return false;
+        } else {
+            double i = amount * RATE;
+            this.balance = this.balance - amount - i;
+            return true;
+        }
     }
-
 }
