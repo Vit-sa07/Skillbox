@@ -1,9 +1,7 @@
 public class CardAccount extends BankAccount {
-    public final double RATE = 0.001;
+    private final double RATE = 0.001;
 
-
-
-    public CardAccount(String ownerName) {
+    CardAccount(String ownerName) {
         super(ownerName);
     }
 

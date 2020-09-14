@@ -5,32 +5,32 @@ public class BankAccount {
     public static int nextAccountNumber = 1;
 
 
-    public BankAccount(String ownerName) {
+    BankAccount(String ownerName) {
         this.ownerName = ownerName;
         this.balance = 0.0;
         this.assignNewAccountNumber();
     }
 
-    public void assignNewAccountNumber() {
+    void assignNewAccountNumber() {
         this.accountNumber = this.nextAccountNumber;
         this.nextAccountNumber = this.nextAccountNumber + 1;
     }
 
 
-    public double getBalance() {
+    double getBalance() {
         return this.balance;
     }
 
-    public boolean deposit(double amount) {
+    boolean deposit(double amount) {
         return this.updateBalance(amount);
 
     }
 
-    public boolean withdraw(double amount) {
+    boolean withdraw(double amount) {
         return this.updateBalance(-amount);
     }
 
-    public boolean updateBalance(double amount) {
+    boolean updateBalance(double amount) {
         double sum = this.balance + amount;
         if (sum < 0) {
             System.out.println("У вас недостаточно средств!");
@@ -41,7 +41,7 @@ public class BankAccount {
         }
     }
 
-    public void transferTo(BankAccount otherAccount, double amount) {
+    void transferTo(BankAccount otherAccount, double amount) {
         if (withdraw(amount)) {
             otherAccount.deposit(amount);
             System.out.println("Деньги успешно переведены!");
