@@ -1,4 +1,6 @@
 public class CardAccount extends BankAccount {
+    public final double RATE = 0.001;
+
 
 
     public CardAccount(String ownerName) {
@@ -7,14 +9,6 @@ public class CardAccount extends BankAccount {
 
     @Override
     public boolean withdraw(double amount) {
-        double sum = this.balance + amount;
-        if (sum < 0) {
-            System.out.println("У вас недостаточно средств!");
-            return false;
-        } else {
-            double i = amount * RATE;
-            this.balance = this.balance - amount - i;
-            return true;
-        }
+        return super.withdraw(amount + (amount * RATE));
     }
 }

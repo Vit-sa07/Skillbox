@@ -3,7 +3,6 @@ public class BankAccount {
     public String ownerName;
     public int accountNumber;
     public static int nextAccountNumber = 1;
-    public final double RATE = 0.001;
 
 
     public BankAccount(String ownerName) {
