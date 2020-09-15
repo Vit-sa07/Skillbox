@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 
 public class DepositAccount extends BankAccount {
-    private LocalDate update;
     private LocalDate created;
 
 
@@ -18,6 +17,7 @@ public class DepositAccount extends BankAccount {
 
     @Override
     boolean withdraw(double amount) {
+        LocalDate update;
         update = LocalDate.now();
         if (created.isAfter(update.minusMonths(1))) {
             System.out.println("Вывод средств невозможен! После срока пополнения прошло менее 30 дней");

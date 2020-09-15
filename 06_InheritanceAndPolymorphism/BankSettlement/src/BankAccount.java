@@ -1,8 +1,9 @@
 public class BankAccount {
-    public double balance;
-    public String ownerName;
-    public int accountNumber;
-    public static int nextAccountNumber = 1;
+    private double balance;
+    private String ownerName;
+    private int accountNumber;
+    private static int nextAccountNumber = 1;
+
 
 
     BankAccount(String ownerName) {
@@ -14,11 +15,6 @@ public class BankAccount {
     void assignNewAccountNumber() {
         this.accountNumber = this.nextAccountNumber;
         this.nextAccountNumber = this.nextAccountNumber + 1;
-    }
-
-
-    double getBalance() {
-        return this.balance;
     }
 
     boolean deposit(double amount) {
@@ -50,5 +46,37 @@ public class BankAccount {
 
     public String toString() {
         return "На счету " + this.ownerName + " баланс: " + this.balance;
+    }
+
+    protected void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    double getBalance() {
+        return this.balance;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public static int getNextAccountNumber() {
+        return nextAccountNumber;
+    }
+
+    public static void setNextAccountNumber(int nextAccountNumber) {
+        BankAccount.nextAccountNumber = nextAccountNumber;
     }
 }
