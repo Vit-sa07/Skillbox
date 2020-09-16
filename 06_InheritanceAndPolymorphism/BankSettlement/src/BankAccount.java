@@ -4,8 +4,6 @@ public class BankAccount {
     private int accountNumber;
     private static int nextAccountNumber = 1;
 
-
-
     BankAccount(String ownerName) {
         this.ownerName = ownerName;
         this.balance = 0.0;
@@ -19,7 +17,6 @@ public class BankAccount {
 
     boolean deposit(double amount) {
         return this.updateBalance(amount);
-
     }
 
     boolean withdraw(double amount) {

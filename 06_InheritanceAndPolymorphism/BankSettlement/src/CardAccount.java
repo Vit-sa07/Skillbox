@@ -1,4 +1,5 @@
 public class CardAccount extends BankAccount {
+
     private final double RATE = 0.001;
 
     CardAccount(String ownerName) {
@@ -6,7 +7,8 @@ public class CardAccount extends BankAccount {
     }
 
     @Override
-    public boolean withdraw(double amount) {
+    boolean withdraw(double amount) {
         return super.withdraw(amount + (amount * RATE));
     }
+
 }
