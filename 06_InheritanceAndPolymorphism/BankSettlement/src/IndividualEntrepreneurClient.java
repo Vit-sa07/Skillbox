@@ -1,6 +1,7 @@
 public class IndividualEntrepreneurClient extends Client {
     private final double RATE1 = 0.0005;
     private final double RATE2 = 0.001;
+    private final int sum = 1000;
 
 
     IndividualEntrepreneurClient(String ownerName) {
@@ -16,11 +17,10 @@ public class IndividualEntrepreneurClient extends Client {
 
     @Override
     boolean deposit(double amount) {
-        if (amount >= 1000) {
+        if (amount >= sum) {
             return super.deposit(amount - (amount * RATE1));
-        } else if (amount < 1000) {
+        } else {
             return super.deposit(amount - (amount * RATE2));
         }
-        return true;
     }
 }
