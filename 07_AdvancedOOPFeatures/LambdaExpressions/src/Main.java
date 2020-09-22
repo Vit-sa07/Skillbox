@@ -13,6 +13,11 @@ public class Main
     public static void main(String[] args)
     {
         ArrayList<Employee> staff = loadStaffFromFile();
+        Collections.sort(staff, Comparator.comparing(Employee::getSalary)
+                .thenComparing(Employee::getName));
+        for (Employee employee : staff){
+            System.out.println(employee);
+        }
 
 
     }
