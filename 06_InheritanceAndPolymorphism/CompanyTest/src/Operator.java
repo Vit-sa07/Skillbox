@@ -1,12 +1,38 @@
-public class Operator extends Employee {
+public class Operator implements Employee {
+    String position;
+    int id;
 
-    public Operator(String ID, int salary, Company company) {
-        super(ID, salary, company);
+    double fixPartSalary = 20000 + (Math.random() * 25000);
+
+    public Operator (String position, int id) {
+        this.id = id;
+        this.position = position;
+    }
+
+    public Operator() {
     }
 
     @Override
-    public int getMonthSalary() {
-        return salary;
+    public long getIncome() {
+        return 0;
     }
 
+    @Override
+    public double getMonthSalary() {
+        double operatorSalary = fixPartSalary;
+        operatorSalary = operatorSalary * 100;
+        int i = (int) Math.round(operatorSalary);
+        operatorSalary = (double) i / 100;
+        return operatorSalary;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String getPosition() {
+        return position;
+    }
 }

@@ -1,25 +1,39 @@
-public class Manager extends Employee {
+public class Manager implements Employee {
+    String position;
+    int id;
 
-    private final static double BONUS_PERCENT = 0.05;
-    private int monthProceeds = 0;
+    double sales = 115000 + (Math.random() * 140000);
+    double fixPartSalary = 40000 + (Math.random() * 20000);
 
-    public Manager(String ID, int salary, Company company) {
-        super(ID, salary, company);
+    public Manager(String position, int id) {
+        this.id = id;
+        this.position = position;
+    }
+
+    public Manager() {
     }
 
     @Override
-    public int getMonthSalary() {
-        return salary + bonusValue;
+    public long getIncome() {
+        return 0;
     }
 
     @Override
-    public int gainMoney() {
-        monthProceeds = 115000 + (int)(Math.random() * ((400000 - 115000) + 1));
-        return monthProceeds;
+    public double getMonthSalary() {
+        double managerSalary = fixPartSalary + (0.05 * sales);
+        managerSalary = managerSalary * 100;
+        int i = (int) Math.round(managerSalary);
+        managerSalary = (double) i / 100;
+        return managerSalary;
     }
 
     @Override
-    public void countBonus() {
-        bonusValue = (int)Math.round(monthProceeds * BONUS_PERCENT);
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String getPosition() {
+        return position;
     }
 }

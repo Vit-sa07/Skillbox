@@ -1,30 +1,11 @@
-public abstract class Employee {
+public interface Employee {
 
-    private final String ID;
-    protected int salary;
-    protected int bonusValue = 0;
-    protected Company company;
+    double getMonthSalary();
 
-    public Employee(String ID, int salary, Company company) {
-        this.ID = ID;
-        this.salary = salary;
-        this.company = company;
-    }
+    int getId();
 
-    public abstract int getMonthSalary();
+    String getPosition();
 
-    public int gainMoney() {
-        return 0;
-    }
+    long getIncome();
 
-    public void countBonus() {}
-
-    public String getName() {
-        return this.ID;
-    }
-
-    public int getBonusValue() {
-        return bonusValue;
-    }
 }
-
