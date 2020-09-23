@@ -1,21 +1,16 @@
 public class TopManager implements Employee {
-    String position;
-    int id;
+    private Company company;
+    private Double salary;
 
     double fixPartSalary = 90000 + (Math.random() * 30000);
 
-    public TopManager(String position, int id) {
-        super();
-        this.id = id;
-        this.position = position;
+    public TopManager(Company company) {
+        this.company = company;
+        this.salary = getMonthSalary();
     }
 
-    public TopManager() {
-    }
-
-    @Override
     public long getIncome() {
-        return Company.COMPANY_GOAL;
+        return Company.companyGoal;
     }
 
     @Override
@@ -30,16 +25,6 @@ public class TopManager implements Employee {
         int i = (int) Math.round(topManagerSalary);
         topManagerSalary = (double) i / 100;
         return topManagerSalary;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public String getPosition() {
-        return position;
     }
 
 }

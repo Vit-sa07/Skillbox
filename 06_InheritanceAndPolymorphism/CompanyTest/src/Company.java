@@ -1,63 +1,36 @@
 import java.util.*;
 
-public class Company implements Comparator<Employee> {
-    public static int COMPANY_GOAL;
+public class Company {
+    public static int companyGoal;
 
     List<Employee> workers = new ArrayList<>();
 
     public Company(int TotalIncome) {
-        COMPANY_GOAL = TotalIncome;
+        companyGoal = TotalIncome;
     }
 
-    public int hire(Employee employee, String position, int id) {
-        if (employee instanceof Manager) {
-            workers.add(new Manager(position, id));
-        } else if (employee instanceof TopManager) {
-            workers.add(new TopManager(position, id));
-        } else if (employee instanceof Operator) {
-            workers.add(new Operator(position, id));
-        }
-        return workers.size();
+    public boolean hire(Employee employee) {
+        if (employee != null)
+            return this.workers.add(employee);
+        return false;
     }
 
-    public int hireAll(Employee employee, String position, int countWorkers) {
-        System.out.println("В компанию нанято " + countWorkers + " сотрудников на должность " + position);
-        for (int i = 1; i < countWorkers + 1; i++) {
-            hire(employee, position, i);
-        }
-        return workers.size();
+    public boolean hireAll(List<Employee> candidates) {
+        return this.workers.addAll(candidates);
     }
 
     public void setIncome(int income) {
-        this.COMPANY_GOAL = income;
+        this.companyGoal = income;
     }
 
     public int getIncome() {
-        return COMPANY_GOAL;
+        return companyGoal;
     }
 
-    public void fire(String position, int id) {
-        System.out.println("Уволили " + position + "-а" + ", ID которого " + id);
-        Iterator<Employee> employeeIterator = workers.iterator();
-        while (employeeIterator.hasNext()) {
-            Employee nextEmployees = employeeIterator.next();
-            if (nextEmployees.getId() == id && nextEmployees.getPosition().equalsIgnoreCase(position)) {
-                employeeIterator.remove();
-            }
-        }
-    }
-
-    public void fireAll(String postion, int beginId, int endId) {
-        Iterator<Employee> employeeIterator = workers.iterator();
-        while (employeeIterator.hasNext()) {
-            Employee nextEmployees = employeeIterator.next();
-            for (int i = beginId; i <= endId; i++) {
-                if (nextEmployees.getId() == i && nextEmployees.getPosition().equalsIgnoreCase(postion)) {
-                    employeeIterator.remove();
-                }
-            }
-        }
-        System.out.println("Сотрудников в компании после увольнения: " + workers.size() + " человек");
+    public boolean fireAll(Employee badEmployee) {
+        if (badEmployee != null)
+            return workers.remove(badEmployee);
+        return false;
     }
 
     public void getTopEmployees(int count) {
@@ -80,20 +53,8 @@ public class Company implements Comparator<Employee> {
         System.out.println("Сотрудников в компании: " + workers.size() + " человек");
     }
 
-    @Override
-
-    public int compare(Employee o1, Employee o2) {
-        return 0;
-    }
-
     public int compare1(Employee o1, Employee o2) {
-        if (o1.getMonthSalary() > o2.getMonthSalary()) {
-            return 1;
-        }
-        if (o1.getMonthSalary() < o2.getMonthSalary()) {
-            return -1;
-        }
-        return 0;
+        return Double.compare(o1.getMonthSalary(), o2.getMonthSalary());
     }
 
     public int compare2(Employee o1, Employee o2) {
