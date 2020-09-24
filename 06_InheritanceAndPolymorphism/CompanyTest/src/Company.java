@@ -3,7 +3,7 @@ import java.util.*;
 public class Company {
     public static int companyGoal;
 
-    List<Employee> workers = new ArrayList<>();
+    private List<Employee> workers = new ArrayList<>();
 
     public Company(int TotalIncome) {
         companyGoal = TotalIncome;
@@ -33,20 +33,26 @@ public class Company {
         return false;
     }
 
-    public void getTopEmployees(int count) {
+    public List<Employee> getTopEmployees(int count) {
         workers.sort((o1, o2) -> compare1(o2, o1));
         System.out.println("\nСписок " + count + " самых ВЫСОКИХ зарплат в компании по УБЫВАНИЮ:");
-        for (int i = 0; i < count; i++) {
-            System.out.println((i + 1) + ". " + workers.get(i).getMonthSalary());
+        if (count <= workers.size()) {
+            List<Employee> lowestList = workers.subList(0, count);
+            lowestList.forEach(e -> System.out.println("• " + e.getMonthSalary() + " руб."));
+            return lowestList;
         }
+        return  workers;
     }
 
-    public void getLowestEmployees(int count) {
+    public List<Employee> getLowestEmployees(int count) {
         workers.sort((o1, o2) -> compare2(o2, o1));
         System.out.println("\nСписок " + count + " самых НИЗКИХ зарплат в компании :");
-        for (int i = 0; i < count; i++) {
-            System.out.println((i + 1) + ". " + workers.get(i).getMonthSalary());
+        if (count <= workers.size()) {
+            List<Employee> topList = workers.subList(0, count);
+            topList.forEach(e -> System.out.println("• " + e.getMonthSalary() + " руб."));
+            return topList;
         }
+        return  workers;
     }
 
     public void getCompanySize() {
@@ -58,13 +64,7 @@ public class Company {
     }
 
     public int compare2(Employee o1, Employee o2) {
-        if (o1.getMonthSalary() > o2.getMonthSalary()) {
-            return -1;
-        }
-        if (o1.getMonthSalary() < o2.getMonthSalary()) {
-            return 1;
-        }
-        return 0;
+        return Double.compare(o2.getMonthSalary(), o1.getMonthSalary());
     }
 }
 

@@ -2,7 +2,7 @@ public class Operator implements Employee {
     private Company company;
     private Double salary;
 
-    double fixPartSalary = 20000 + (Math.random() * 25000);
+    private double fixPartSalary = 20000 + (Math.random() * 25000);
 
     public Operator (Company company) {
         this.company = company;

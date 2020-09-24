@@ -2,8 +2,8 @@ public class Manager implements Employee {
     private Company company;
     private Double salary;
 
-    double sales = 115000 + (Math.random() * 140000);
-    double fixPartSalary = 40000 + (Math.random() * 20000);
+    private double sales = 115000 + (Math.random() * 140000);
+    private double fixPartSalary = 40000 + (Math.random() * 20000);
 
     public Manager(Company company) {
         this.company = company;

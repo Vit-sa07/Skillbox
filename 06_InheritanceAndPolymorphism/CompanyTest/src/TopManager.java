@@ -2,7 +2,7 @@ public class TopManager implements Employee {
     private Company company;
     private Double salary;
 
-    double fixPartSalary = 90000 + (Math.random() * 30000);
+    private double fixPartSalary = 90000 + (Math.random() * 30000);
 
     public TopManager(Company company) {
         this.company = company;
