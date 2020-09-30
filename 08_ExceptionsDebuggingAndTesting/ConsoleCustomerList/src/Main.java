@@ -12,12 +12,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CustomerStorage executor = new CustomerStorage();
-        for (; ; ) {
+        for(;;) {
+            String command = scanner.nextLine();
+            String[] tokens = command.split("\\s+", 2);
             try {
-
-
-                String command = scanner.nextLine();
-                String[] tokens = command.split("\\s+", 2);
                 if (tokens[0].equals("add")) {
                     executor.addCustomer(tokens[1]);
                 } else if (tokens[0].equals("list")) {
@@ -31,8 +29,10 @@ public class Main {
                 } else {
                     System.out.println(commandError);
                 }
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
             }
         }
     }
