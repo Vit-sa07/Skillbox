@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RouteCalculatorTest extends TestCase {
-
     List<Station> route;
     StationIndex stationIndex;
     List<Station> stations;
@@ -19,6 +18,7 @@ public class RouteCalculatorTest extends TestCase {
     @Override
     protected void setUp() {
         route = new ArrayList<>();
+        stationIndex = new StationIndex();
 
         first = new Line(1, "Первая линия");
         second = new Line(2, "Вторая линия");
@@ -45,6 +45,8 @@ public class RouteCalculatorTest extends TestCase {
             third.addStation(stations.get(i));
         }
 
+
+
         List<Station> connection1 = new ArrayList<>();
         connection1.add(new Station("3 станция", first));
         connection1.add(new Station("3 станция", second));
@@ -52,8 +54,6 @@ public class RouteCalculatorTest extends TestCase {
         List<Station> connection2 = new ArrayList<>();
         connection2.add(new Station("5 станция", second));
         connection2.add(new Station("5 станция", third));
-
-        stationIndex = new StationIndex();
 
         stationIndex.addLine(first);
         stationIndex.addLine(second);
@@ -69,6 +69,7 @@ public class RouteCalculatorTest extends TestCase {
     }
 
     @Test
+
     public void testCalculateDuration() {
         route.add(new Station("1 станция", first));
         route.add(new Station("2 станция", first));
@@ -114,7 +115,6 @@ public class RouteCalculatorTest extends TestCase {
         assertEquals(routeExpected, routeActual);
     }
 
-    @Test
     public void testCalculateDurationTwoTransfer() {
         route.add(new Station("1 станция", first));
         route.add(new Station("2 станция", first));
