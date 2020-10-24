@@ -8,10 +8,8 @@ public class Main {
         try {
             Connection connection = DriverManager.getConnection(url, "root", "adminadmin");
             Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT course_name, COUNT(subscription_date)/MAX(MONTH(subscription_date)) AS Avg_purchases FROM purchaselist GROUP BY course_name ORDER BY Avg_purchases DESC;");
-            while (resultSet.next()){
+            ResultSet resultSet = statement.executeQuery("SELECT course_name, COUNT(*)/(MAX(MONTH(subscription_date))-MIN(MONTH(subscription_date))+1) as Avg_purchases FROM purchaselist GROUP BY course_name ORDER BY Avg_purchases DESC");
+            while (resultSet.next()) {
                 System.out.println(resultSet.getString("course_name") + "  -  " + resultSet.getDouble("Avg_purchases"));
             }
             resultSet.close();
