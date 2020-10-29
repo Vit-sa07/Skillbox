@@ -1,56 +1,31 @@
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.concurrent.*;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
-        String srcFolder = "/users/sortedmap/Desktop/src";
-        String dstFolder = "/users/sortedmap/Desktop/dst";
-
+public class Main {
+    public static void main(String[] args) {
+        String srcFolder = "imgSrc/";
         File srcDir = new File(srcFolder);
+        File[] files = srcDir.listFiles();
+        int cores = Runtime.getRuntime().availableProcessors();
+
 
         long start = System.currentTimeMillis();
 
-        File[] files = srcDir.listFiles();
-
-        try
-        {
-            for(File file : files)
-            {
-                BufferedImage image = ImageIO.read(file);
-                if(image == null) {
-                    continue;
-                }
-
-                int newWidth = 300;
-                int newHeight = (int) Math.round(
-                        image.getHeight() / (image.getWidth() / (double) newWidth)
-                );
-                BufferedImage newImage = new BufferedImage(
-                        newWidth, newHeight, BufferedImage.TYPE_INT_RGB
-                );
-
-                int widthStep = image.getWidth() / newWidth;
-                int heightStep = image.getHeight() / newHeight;
-
-                for (int x = 0; x < newWidth; x++)
-                {
-                    for (int y = 0; y < newHeight; y++) {
-                        int rgb = image.getRGB(x * widthStep, y * heightStep);
-                        newImage.setRGB(x, y, rgb);
-                    }
-                }
-
-                File newFile = new File(dstFolder + "/" + file.getName());
-                ImageIO.write(newImage, "jpg", newFile);
+        if (files != null) {
+            ExecutorService service = Executors.newFixedThreadPool(cores);
+            for (int i = 0; i < files.length; i++) {
+                service.submit(new ImageResizer(files[i]));
             }
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+            service.shutdown();
+            try {
+                service.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Неверно указан путь!");
         }
 
-        System.out.println("Duration: " + (System.currentTimeMillis() - start));
+        System.out.println("Общее время: " + (System.currentTimeMillis() - start) + " ms");
     }
 }
